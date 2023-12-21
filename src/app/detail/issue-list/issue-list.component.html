@@ -1,0 +1,242 @@
+<div class="grid-margin stretch-card">
+  <div class="d-flex align-items-center justify-content-between gap-3 task_wrapper">
+    <div class="list-tittle">
+      <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
+      Tasks
+    </div>
+    <!-- <div class="search-task d-flex">
+      <button
+        id="search-button"
+        class="btn btn-default"
+        (click)="toggleSearch()"
+        [ngClass]="{ show: isSearchFormVisible }"
+      >
+        <span class="glyphicon glyphicon-search"
+          ><i class="fa fa-search" aria-hidden="true"></i
+        ></span>
+      </button>
+      <div
+        id="search-form"
+        class="form-group"
+        [ngClass]="{ show: isSearchFormVisible }"
+      >
+        <div class="input-group d-flex">
+          <input
+            type="search"
+            class="form-control"
+            autocomplete="off"
+            placeholder="Search"
+            aria-label="Recipient's username"
+            aria-describedby="basic-addon2"
+            [(ngModel)]="searchQuery"
+            (ngModelChange)="search()"
+          />
+          <div class="search-data" *ngIf="dashboardcomponent.searchShowResults">
+            <div
+              *ngIf="appservice.searchTasks.length > 0"
+              class="search-results"
+            >
+              <div
+                *ngFor="let project of appservice.searchTasks"
+                class="result-item"
+              >
+                <div
+                  class="search-click-item"
+                  (click)="
+                  dashboardcomponent.selectIssue(
+                      project.id,
+                      project.source,
+                      project.name,
+                      project.baseUrlId
+                    )
+                  "
+                >
+                  {{ project.name }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> -->
+    <div class="search-task d-flex">
+      <button
+        id="search-button"
+        class="btn btn-default"
+      >
+        <span class="glyphicon glyphicon-search"
+          ><i class="fa fa-search" aria-hidden="true"></i
+        ></span>
+      </button>
+      <div
+        id="search-form"
+        class="form-group"
+      >
+        <div class="input-group d-flex">
+            <input
+              id="searchInput"
+              type="search"
+              class="form-control"
+              autocomplete="off"
+              placeholder="Search Tasks"
+              aria-label="Recipient's username"
+              aria-describedby="basic-addon2"
+              [(ngModel)]="dashboardcomponent.searchText"
+              (input)="search()"
+            />
+            <!-- <div
+              class="search-data"
+              *ngIf="dashboardcomponent.searchShowResults"
+            >
+              <div *ngIf="appservice.filteredIssues.length > 0" class="search-results">
+                <div *ngFor="let issue of appservice.filteredIssues" class="result-item">
+                  <div
+                    class="search-click-item"
+                    (click)="
+                      dashboardcomponent.selectIssueFromSearch(
+                        issue.projectid,
+                        issue.id,
+                        appservice.userSourceCode,
+                        issue.issuename,
+                        issue.baseUrlId
+                      )
+                    "
+                  >
+                    {{ issue.issuename }}
+                  </div>
+                </div>
+              </div>
+            </div> -->
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card project_big_list_card">
+    <!-- <ngx-skeleton-loader
+      *ngIf="appservice.isSkeletonLoading"
+      count="20"
+      appearance="line"
+    ></ngx-skeleton-loader> -->
+    <div
+      class="card bg-light text-dark adjust"
+      *ngIf="!appservice.isAssignedIssue"
+    ></div>
+    <div
+      *ngIf="
+        appservice.issues.length !== 0 &&
+        appservice.issuesProjectWise.length !== 0
+      "
+      class="project_box_list_card"
+    >
+      <div
+        class="card text-dark adjust list_card_adjust"
+        *ngFor="
+          let ele of appservice.issues | genericFilter : appservice.searchBy
+        "
+        [ngClass]="{
+          'custom-color-class': parseTime(ele.trackTime) > 0
+        }"
+        [ngStyle]="{'display': ele.isVisible? 'flex' : 'none'}"
+          
+        
+      >
+        <div
+          id="{{ appservice.selectedissueclass === ele.id ? 'issue' : '' }}"
+          class="card-block border_R5"
+        >
+          <div
+            class="row border_none card_align {{
+              appservice.selectedissueclass === ele.id
+                ? 'project_big_list_card_active'
+                : ''
+            }}"
+            id="issue_{{ ele.id }}"
+          >
+            <div class="col-md-10 issue-name">
+              <p
+                class="card-text card_text_dot"
+                data-toggle="tooltip"
+                title="{{ ele.issuename }}"
+              >
+                {{ ele.issuename }}
+              </p>
+              <div id="basicUsage_{{ ele.id }}" class="time_sec">
+                <app-time-container
+                  [trackedtime]="ele.trackTime"
+                ></app-time-container>
+              </div>
+            </div>
+            <div class="col-md-2 icon-play-pause text-center">
+              <i
+                aria-hidden="true"
+                data-toggle="tooltip"
+                title="Start"
+                [class.disableIcon]="appservice.isRefreshingIcon"
+                class="fa fa-play start_play startstop {{
+                  appservice.runningIssueId === ele.id ? 'hideIcon' : 'showIcon'
+                }}"
+                (click)="
+                  dashboardcomponent.timerstart(
+                    'start',
+                    ele.id,
+                    ele.issuename,
+                    ele.projectname,
+                    ele.projectid,
+                    ele.baseUrlId
+                  )
+                "
+              ></i>
+              <i
+                aria-hidden="true"
+                data-toggle="tooltip"
+                title="Stop"
+                [class.disableIcon]="appservice.isRefreshingIcon"
+                class="fa fa-pause stop_play startstop {{
+                  appservice.runningIssueId !== ele.id ? 'hideIcon' : 'showIcon'
+                }}"
+                id="btnCaptureSS"
+                (click)="
+                  dashboardcomponent.timerstart(
+                    'stop',
+                    ele.id,
+                    ele.issuename,
+                    ele.projectname,
+                    ele.projectid,
+                    ele.baseUrlId
+                  )
+                "
+              ></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="col-md-12"
+      *ngIf="
+        appservice.issues.length === 0 &&
+        appservice.issuesProjectWise.length === 0 || searchTextOn && multipleMatchesArrayIds.length === 0
+      "
+    >
+      <p class="card-text" style="padding: 10px 15px">No issue found.</p>
+    </div>
+    <!-- <div
+      class="col-md-12"
+      *ngIf="searchTextOn && multipleMatchesArrayIds.length === 0"
+    >
+      <p class="card-text" style="padding: 10px 15px">No issue found.</p>
+    </div> -->
+  </div>
+  <!-- <div
+    class="col-md-12"
+    *ngIf="
+      (appservice.issues | genericFilter : appservice.searchBy).length === 0
+    "
+  >
+    <p class="no-data" style="padding: 10px 15px; text-align: left">
+      <b>No issue found.</b>
+    </p>
+  </div> -->
+</div>

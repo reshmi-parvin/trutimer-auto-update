@@ -1,0 +1,293 @@
+<div data-ng-show="showError" class="alert alert-danger show_Error" *ngIf="visability">
+  <strong>{{ messages }}</strong>
+</div>
+<div class="right_side_main_content">
+  <div class="row top_fixed">
+    <div class="col-md-12 ps-0 top_area">
+      <div class="card selected-card">
+        <div class="card-body header-block">
+          <div class="card_align gap-3 inner_header_block" *ngIf="appservice.showTopDiv">
+            <div class="top-selected-task">
+              <h5 class="top_task_dot">{{ appservice.selectedIssueName }}</h5>
+              <div class="current_project">
+                <div class="project-btn">
+                  <a>PROJECT</a>
+                </div>
+                <div class="top-project">
+                  {{ appservice.selectedIssueProjectName }}
+                </div>
+              </div>
+            </div>
+
+            <div class="card_align right_side">
+              <div class="header-icons">
+                <a [routerLink]="['/detail/settings']" [routerLinkActive]="['active']"
+                  [routerLinkActiveOptions]="{ exact: true }" ngbTooltip="Settings"><i class="fa fa-cog"
+                    aria-hidden="true"></i></a>
+                <!-- <button ngbTooltip="Refresh" (click)="refresh()" class="refresh-link" [disabled]="appservice.isRefreshing">
+                  <i class="fa fa-repeat" aria-hidden="true"></i>
+                </button> -->
+                <button id="refreshButton" ngbTooltip="Refresh" (click)="refresh()" class="refresh-link"
+                  [disabled]="appservice.isRefreshing">
+                  <i class="fa" [class.fa-repeat]="!appservice.isRefreshing"
+                    [class.fa-refresh]="appservice.isRefreshing" aria-hidden="true"></i>
+                </button>
+              </div>
+              <div class="action-button">
+                <div class="time-title">Total Time Tracked</div>
+                <span class="timer-cls">
+                  {{ appservice.totalTimeWorked }}
+                </span>
+              </div>
+              <div class="startStopButton">
+                <ng-container *ngIf="
+                    !appservice.runningIssueId ||
+                      appservice.runningIssueId !== appservice.selectedIssueId;
+                    else topStopIcon
+                  ">
+                  <i aria-hidden="true" data-toggle="tooltip" title="Start"
+                    [class.disableIcon]="appservice.isRefreshingIcon" class="fa fa-play d_start_play startstop" (click)="
+                      timerstart(
+                        'start',
+                        appservice.selectedIssueId,
+                        appservice.selectedIssueName,
+                        appservice.selectedIssueProjectName,
+                        appservice.selectedProjectId,
+                        appservice.selectedBaseUrlId
+                      )
+                    "></i>
+                </ng-container>
+                <ng-template #topStopIcon>
+                  <i aria-hidden="true" data-toggle="tooltip" title="Stop"
+                    [class.disableIcon]="appservice.isRefreshingIcon" class="fa fa-pause d_stop_play startstop" (click)="
+                      timerstart(
+                        'stop',
+                        appservice.selectedIssueId,
+                        appservice.selectedIssueName,
+                        appservice.selectedIssueProjectName,
+                        appservice.selectedProjectId,
+                        appservice.selectedBaseUrlId
+                      )
+                    "></i>
+                </ng-template>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body" *ngIf="!appservice.isAssignedProject">
+          <div class="row border_none">
+            <div class="col-md-12">
+              <p class="card-text" style="padding: 10px 15px">
+                No project found for the current search.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12 ps-0">
+      <div class="card total-time" *ngIf="appservice.totalWorkingshowDiv">
+        <div class="card-body total_work_pad">
+          <div class="current_project">
+            <div class="project-btn">
+              <a><i class="fa fa-line-chart" aria-hidden="true"></i>Total
+                Projects</a>
+            </div>
+            <div class="top-project">
+              <span id="totalProject" class="color_blue">{{
+                appservice.totalProjectCount
+                }}</span>
+            </div>
+          </div>
+          <div class="current_project">
+            <div class="project-btn">
+              <a><i class="fa fa-hashtag" aria-hidden="true"></i>Total Tasks</a>
+            </div>
+            <div class="top-project">
+              <span id="totalIssueCount" class="color_blue">{{
+                appservice.totalIssueCount
+                }}</span>
+            </div>
+          </div>
+          <!-- <div>
+             <p>Current UTC Time: {{ currentUTCTime }}</p> 
+            <button (click)="showUTCAlert()">Show UTC Time Alert</button>
+          </div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-body data_list">
+    <div class="main_mar_top desh_sec" id="main">
+      <div class="main_content_left">
+        <app-project-list></app-project-list>
+      </div>
+      <div class="main_content_right">
+        <app-issue-list></app-issue-list>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--desktop screenshot html element-->
+<video #livevideo style="
+    height: 900px;
+    width: 900px;
+    border: 2px solid red;
+    position: absolute;
+    top: -10000px;
+    left: -10000px;
+  "></video>
+<canvas #screenshot style="
+    height: 30%;
+    width: 30%;
+    border: 2px solid green;
+    position: absolute;
+    top: -10000px;
+    left: -10000px;
+  ">
+</canvas>
+
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header modalcustom-header">
+    <h4 class="modal-title" id="modal-basic-title">Confirmation</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i></span>
+    </button>
+  </div>
+  <div class="modal-body modalcustom-body text-center">
+    <h2>Are you still working?</h2>
+    <h4 class="modal-body-title">
+      <countdown [config]="{ leftTime: this.appservice.idleModalOpenTime }" (event)="handleTimerEvent($event)"></countdown>
+    </h4>
+    <div Class="progress-bar_container">
+      <svg viewBox="0 0 100 100">
+        <circle stroke="#EAEAEA" stroke-width="4.5" cx="50" cy="50" r="40" fill="none" />
+        <circle id="progress_circle" stroke="#78C000" stroke-width="4.5" cx="50" cy="50" r="40" fill="none"
+          pathLength="100" [style]="'stroke-dashoffset:' + (idleTimeCounter)" />
+        <circle Class="progress_circle" stroke="#C7E596" stroke-width="2.5" cx="50" cy="50" r="35" fill="none"
+          pathLength="100" />
+      </svg>
+      <div class="text_content">
+        <p class="progress_text_second">{{(idleTimeCounter - 100).toString().replace("-","")}}%</p>
+        <p class="progress_text_second2">Complete</p>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer modalcustom-footer">
+    <button type="button" class="btn btn btn-primary" (click)="c('yes')">
+      Yes
+    </button>
+    <button type="button" class="btn btn-warning" (click)="c('no')">No</button>
+  </div>
+</ng-template>
+<ng-template #viewContent let-c="close" let-d="dismiss">
+  <div class="modal-header modalcustom-header">
+    <h4 class="modal-title" id="modal-basic-title">
+      Currently you are not tracking!
+    </h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i></span>
+    </button>
+  </div>
+  <div class="modal-body modalcustom-body text-center">
+    <h2>Are you still working?</h2>
+    <h4 class="modal-body-title">
+      <div class="roundbody">
+        <span aria-hidden="true"><i class="fa fa-exclamation-circle" aria-hidden="true"></i></span>
+      </div>
+    </h4>
+  </div>
+  <!-- <div class="modal-footer modalcustom-footer">
+    <button type="button" class="btn btn btn-primary" (click)="c('yes')">
+      Yes
+    </button>
+    <button type="button" class="btn btn-warning" (click)="c('no')">No</button>
+  </div> -->
+</ng-template>
+<ng-template #runningContent let-c="close" let-d="dismiss">
+  <div class="modal-header modalcustom-header">
+    <h4 class="modal-title" id="modal-basic-title">
+      Currently you are not tracking!
+    </h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i></span>
+    </button>
+  </div>
+  <div class="modal-body modalcustom-body text-center">
+    <h2>Are you still working?</h2>
+    <h4 class="modal-body-title">
+      <div class="roundbody">
+        <span aria-hidden="true"><i class="fa fa-exclamation-circle" aria-hidden="true"></i></span>
+      </div>
+    </h4>
+  </div>
+  <!-- <div class="modal-footer modalcustom-footer">
+    <button type="button" class="btn btn btn-primary" (click)="c('yes')">
+      Yes
+    </button>
+    <button type="button" class="btn btn-warning" (click)="c('no')">No</button>
+  </div> -->
+</ng-template>
+
+<!-- For if anyone change the time manually. -->
+<ng-template #manualTimeContent let-c="close" let-d="dismiss">
+  <div class="modal-header modalcustom-header">
+    <h4 class="modal-title" id="modal-basic-title">Update Date and Time</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i></span>
+    </button>
+  </div>
+  <div class="modal-body modalcustom-body text-center">
+    <h4>
+      Can't track your time because your computer's date and time are incorrect.
+      After fixed this please refresh again.
+    </h4>
+    <h4 class="modal-body-title">
+      <div class="roundbody">
+        <span aria-hidden="true"><i class="fa fa-exclamation-circle" aria-hidden="true"></i></span>
+      </div>
+    </h4>
+  </div>
+</ng-template>
+
+<ng-template #noInternetContent let-c="close" let-d="dismiss">
+  <div class="modal-header modalcustom-header">
+    <h4 class="modal-title" id="modal-basic-title">
+      Check your Internet Connection
+    </h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i></span>
+    </button>
+  </div>
+  <div class="modal-body modalcustom-body text-center">
+    <h4>
+      Please connect to the internet to continue tracking time. After internet
+      connection Please refresh again.
+    </h4>
+    <h4 class="modal-body-title">
+      <div class="roundbody">
+        <span aria-hidden="true"><i class="fa fa-exclamation-circle" aria-hidden="true"></i></span>
+      </div>
+    </h4>
+  </div>
+</ng-template>
+
+<ng-template #permission let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">{{ issue }}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn btn-primary" (click)="c('yes')">
+      close
+    </button>
+  </div>
+</ng-template>
+
+<!-- <div class="alert">
+  <span class="closebtn" onclick="this.parentElement.style.display='none'">&times;</span>
+  YOU ARE NOT TRACKING.
+</div> -->

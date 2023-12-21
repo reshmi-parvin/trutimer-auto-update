@@ -1,0 +1,148 @@
+/* You can add global styles to this file, and also import other style files */
+@font-face {
+  font-family: "TT Interfaces";
+  src: url("./assets/fonts/TTInterfaces-Regular.eot");
+  src: url("./assets/fonts/TTInterfaces-Regular.eot?#iefix")
+      format("embedded-opentype"),
+    url("./assets/fonts/TTInterfaces-Regular.woff2") format("woff2"),
+    url("./assets/fonts/TTInterfaces-Regular.woff") format("woff"),
+    url("./assets/fonts/TTInterfaces-Regular.ttf") format("truetype"),
+    url("./assets/fonts/TTInterfaces-Regular.svg#TTInterfaces-Regular")
+      format("svg");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Jeko DEMO";
+  src: url("./assets/fonts/JekoDEMO-Medium.eot");
+  src: url("./assets/fonts/JekoDEMO-Medium.eot?#iefix")
+      format("embedded-opentype"),
+    url("./assets/fonts/JekoDEMO-Medium.woff2") format("woff2"),
+    url("./assets/fonts/JekoDEMO-Medium.woff") format("woff"),
+    url("./assets/fonts/JekoDEMO-Medium.ttf") format("truetype"),
+    url("./assets/fonts/JekoDEMO-Medium.svg#JekoDEMO-Medium") format("svg");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Jeko DEMO";
+  src: url("./assets/fonts/JekoDEMO-ExtraBold.eot");
+  src: url("./assets/fonts/JekoDEMO-ExtraBold.eot?#iefix")
+      format("embedded-opentype"),
+    url("./assets/fonts/JekoDEMO-ExtraBold.woff2") format("woff2"),
+    url("./assets/fonts/JekoDEMO-ExtraBold.woff") format("woff"),
+    url("./assets/fonts/JekoDEMO-ExtraBold.ttf") format("truetype"),
+    url("./assets/fonts/JekoDEMO-ExtraBold.svg#JekoDEMO-ExtraBold")
+      format("svg");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@mixin colorBlue($lighten: 37%, $opacity: 1) {
+  background: hsla(249, 46%, $lighten, $opacity);
+}
+// Global styles
+// body {
+//   transition: background-color 0.3s, color 0.3s;
+// }
+
+// .dark-mode {
+//   background-color: black;
+//   color: white;
+// }
+* {
+  font-family: var(--font_primary);
+  margin: 0;
+  margin-block: 0;
+  margin-inline: 0;
+  padding: 0;
+  padding-block: 0;
+  padding-inline: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  transition: 0.1s all ease-out;
+}
+html,
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  height: 100%;
+  font-family: Arial, Helvetica, sans-serif;
+}
+:is(h1, h2, h3, h4, h5, h6, p, a, th, td) {
+  color: var(--font_secondary);
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+ul,
+li {
+  margin: 0;
+  margin-block: 0;
+  margin-inline: 0;
+  padding: 0;
+  padding-block: 0;
+  padding-inline: 0;
+  list-style: none;
+}
+/* CAN (MUST) BE REMOVED ! Sample Global style */
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  background: url(./assets/background.jpg) no-repeat center fixed;
+  -webkit-background-size: cover; /* pour anciens Chrome et Safari */
+  background-size: cover; /* version standardisée */
+
+  .title {
+    color: white;
+    margin: 0;
+    padding: 50px 20px;
+  }
+
+  a {
+    color: #fff !important;
+    text-transform: uppercase;
+    text-decoration: none !important;
+    background: #ed3330;
+    padding: 20px;
+    border-radius: 5px;
+    display: inline-block;
+    border: none;
+    transition: all 0.4s ease 0s;
+
+    &:hover {
+      background: #fff;
+      color: #ed3330 !important;
+      letter-spacing: 1px;
+      -webkit-box-shadow: 0px 5px 40px -10px rgba(0, 0, 0, 0.57);
+      -moz-box-shadow: 0px 5px 40px -10px rgba(0, 0, 0, 0.57);
+      box-shadow: 5px 40px -10px rgba(0, 0, 0, 0.57);
+      transition: all 0.4s ease 0s;
+    }
+    &:focus-visible {
+      outline: none;
+    }
+  }
+}
+
+.card {
+  --bs-card-border-radius: 0;
+  --bs-card-border-width: 0 !important;
+  .card-body {
+    --bs-card-border-radius: 0;
+  }
+}

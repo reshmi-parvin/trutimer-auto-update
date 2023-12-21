@@ -1,0 +1,90 @@
+<div class="row top_fixed">
+  <div data-ng-show="showError" class="alert {{ alerttype }}" *ngIf="visability">
+    <strong>{{ messages }}</strong>
+  </div>
+  <div class="col-12">
+    <div class="card selected-card">
+      <div class="row">
+        <div class="col-3">
+          <h5 class="top-project">Settings</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<form #settingForm="ngForm">
+  <div class="row" *ngFor="let ele of appservice.sources">
+    <!--Modal Start-->
+    <div class="setting_box col-4" *ngFor="let urls of ele.baseApiUrls; let i = index; let last = last">
+      <div class="logosettings">
+        <b>{{ ele.sourceName }}</b>
+        <span class="pull-right" (click)="onKeydown(ele.sourceCode)"><button *ngIf="last" class="button" type="button">+
+            Add More</button>
+        </span>
+      </div>
+      <div class="form-group">
+        <input type="text" [name]="apiKey + i" class="form-control" [(ngModel)]="urls.apiKey"
+           placeholder="Enter source token" required />
+      </div>
+      <div class="form-group">
+        <input type="text" [name]="baseUrl+i" required class="form-control" [(ngModel)]="urls.baseUrl"
+           placeholder="Enter URL" />
+        <div *ngIf="['baseUrl+i'].dirty || ['baseUrl+i'].touched" class="alert">
+          <div *ngIf="['baseUrl+i'].errors?.required">
+            Name is required.
+          </div>
+        </div>
+      </div>
+      <button (disabled)="this.disabled" type="submit" class="btn btn-success ml-2" (click)="
+        createUserApiKey(ele.sourceCode, urls.apiKey, urls.baseUrl, urls.id)
+      ">
+        Save
+      </button>
+      <button type="button" class="btn btn-danger ml-2" (click)="DeleteUserApiKey(ele.sourceTypeId, urls.id)">
+        Delete
+      </button>
+    </div>
+
+    <ng-template #content let-modal>
+      <div class="modal-header Modalcustom-headerTwo">
+        <button type="button" class="close" aria-label="Close" (click)="modal.close('Save click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body Modalcustom-bodyTwo">
+        <div class="roundbody">
+          <span aria-hidden="true">&times;</span>
+        </div>
+        <div class="heading mb-4">
+          <h4 class="modal-title">
+            Are You Sure You Want to Delete this api Key ?
+          </h4>
+        </div>
+        <div class="btn-group1 mt-4">
+          <button type="button" class="btn btn-default" (click)="DeleteUserApiKey(SourceTypeId)">
+            Yes
+          </button>
+          <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">
+            No
+          </button>
+        </div>
+      </div>
+    </ng-template>
+    <ng-template #permission let-c="close" let-d="dismiss">
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">
+          {{ issue }}
+        </h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn btn-primary" (click)="c('yes')">
+          close
+        </button>
+      </div>
+    </ng-template>
+    <!--Modal End-->
+  </div>
+</form>

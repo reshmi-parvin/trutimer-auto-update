@@ -1,0 +1,48 @@
+:root {
+  // universe-color
+  --white: #fff;
+  --black: #000000;
+
+  //symbol color
+  --bg_clr_green: hsla(119.63deg, 70.09%, 37%, 1);
+  --bg_clr_green_light: hsla(119.63deg, 70.09%, 85%, 1);
+  --bg_clr_away: hsl(52, 86%, 52%);
+  --bg_clr_warning: #f3d305;
+  --bg_clr_warning_light: hsla(52, 95%, 85%, 1);
+
+  // text
+  --text_clr_prime: hsla(249, 42%, 41%, 1);
+
+  // bg
+  --bg_clr_login_box_shadow: hsla(249, 58%, 26%, 0.251);
+  --bg_clr_prime_active_shadow_light: hsla(249, 45%, 61%, 0.522);
+  --bg_clr_prime_shadow_extra_light: hsla(248, 66%, 58%, 0.522);
+  --bg_clr_prime_extra_extra_light: hsla(250, 35%, 93%, 1);
+  --bg_clr_prime_extra_light: hsla(249, 42%, 60%, 1);
+  --bg_clr_prime_light: hsla(249, 42%, 50%, 1);
+  --bg_clr_prime: hsla(249, 42%, 41%, 1);
+  --bg_clr_prime_dark: hsla(249, 42%, 30%, 1);
+  --bg_clr_prime_extra_dark: hsla(249, 42%, 20%, 1);
+
+  --bg_clr_secondary_light_shadow: hsla(0, 0%, 0%, 0.188);
+  --bg_clr_secondary_extra_light: hsla(0, 0%, 70%, 1);
+  --bg_clr_secondary_light: hsla(0, 0%, 55%, 1);
+  --bg_clr_secondary: hsla(0, 0%, 0%, 1);
+  --bg_clr_secondary_dark: hsla(0, 0%, 20%, 1);
+  --bg_clr_secondary_extra_dark: hsla(0, 0%, 10%, 1);
+  --bg_clr_secondary_shadow: hsla(0, 0%, 0%, 0.09);
+
+  --bg_clr_primary: hsla(0, 0%, 100%, 1);
+  --bg_clr_primary_dark: hsla(0, 0%, 95%, 1);
+  --bg_clr_primary_dark_02: hsla(0, 0%, 97%, 1);
+  --bg_clr_primary_extra_dark: hsla(0, 0%, 85%, 1);
+
+  --bg_clr_attention_extra_light: hsla(0, 76%, 85%, 1);
+  --bg_clr_attention_light: hsla(0, 87%, 70%, 1);
+  --bg_clr_attention: rgba(241, 40, 40, 0.922);
+
+  // transition
+  --transition: 0.3s all ease-in-out;
+
+  //
+}

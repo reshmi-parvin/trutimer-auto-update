@@ -1,0 +1,29 @@
+:host {
+  width: 100%;
+}
+
+.footer {
+  padding: 20px 1.8rem;
+  a { 
+    color: theme-color(success);
+    font-size: inherit;
+  }
+  @media (max-width: 991px) {
+    margin-left: 0;
+    width: 100%;
+  }
+}
+
+.text-mute {
+  --bs-text-opacity: 1;
+  color: white;
+}
+// custom css
+.footer{
+  background: #0054AA;
+  position: fixed;
+  bottom: 0;
+  width: 100%; 
+  padding-block: 13px;
+  z-index: 999;
+}

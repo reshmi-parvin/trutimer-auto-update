@@ -1,0 +1,21 @@
+// flex
+@mixin displayFlex($dir, $align, $justify) {
+  display: flex;
+  flex-direction: $dir;
+  align-items: $align;
+  justify-content: $justify;
+}
+
+
+// Media Query
+@mixin min($minWidth) {
+    @media (min-width: $minWidth) {
+      @content;
+    }
+  }
+  
+  @mixin max($maxWidth) {
+    @media (max-width: $maxWidth) {
+      @content;
+    }
+  }

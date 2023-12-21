@@ -1,0 +1,18 @@
+<div class="container-scroller">
+   <app-navbar></app-navbar>
+  <div class="page-body-wrapper">
+    <app-sidebar
+      [class.small_sidebar]="smallToggled"
+      [toggledBar]="smallToggled"
+      (newSidebarStatus)="newStatus()"
+    ></app-sidebar>
+    <div class="main-panel" [class.large_toggled]="largeToggled">
+      <div class="content-wrapper">
+        <router-outlet></router-outlet>
+      </div>
+      <div class="footer_sidebar" [class.toggled]="classToggled">
+      </div>
+    </div>
+    <!-- <app-footer></app-footer> -->
+  </div>
+</div>

@@ -1,0 +1,26 @@
+@use "theme/mixin.scss" as *;
+
+.container-scroller {
+  width: 100%;
+  height: 100%;
+  .page-body-wrapper {
+    padding-top: 0px;
+    width: 100%;
+    height: 100%;
+    @include displayFlex(row, stretch, flex-start);
+  }
+  .main-panel {
+    flex: 1;
+    margin-left: auto;
+    height: 100%;
+
+    @include max(1060px) {
+      margin-inline-start: 80px;
+    }
+
+    .content-wrapper {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}

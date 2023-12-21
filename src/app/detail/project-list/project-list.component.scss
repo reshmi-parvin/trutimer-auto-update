@@ -1,0 +1,172 @@
+@use "theme/mixin.scss" as *;
+
+.projectListbg {
+  width: 100%;
+  border-radius: 10px;
+  padding: 5px;
+  overflow: hidden;
+  background-color: var(--bg_clr_primary_dark);
+  @include displayFlex(column, center, flex-start);
+  gap: 10px;
+  height: 100%;
+  .left_panel_tab {
+    width: 100%;
+    max-height: 100%;
+  }
+}
+::ng-deep {
+  .accordion {
+    display: block;
+    height: 100%;
+    --bs-accordion-border-width: 0px;
+    --bs-accordion-bg: transparent;
+    .accordion-item {
+      @include displayFlex(column, flex-start, flex-start);
+      height: 100%;
+      width: 100%;
+      .collapse {
+        width: 100%;
+      }
+      .accordion-header {
+        width: 100%;
+        .accordion-button {
+          padding: 0;
+          outline: none;
+          box-shadow: none;
+          margin: 0;
+          &::after {
+            display: none;
+          }
+          .accordian_btn {
+            width: 100%;
+            @include displayFlex(row, center, space-between);
+            padding: 10px;
+            .rotate {
+              transition: var(--transition);
+            }
+          }
+          &:not(.collapsed) {
+            color: var(--bg_clr_secondary_extra_dark);
+            background-color: var(--bg_clr_primary);
+            border-top-left-radius: 7px;
+            border-top-right-radius: 7px;
+            .rotate {
+              transform: rotate(180deg);
+            }
+          }
+          &.collapsed {
+            background-color: var(--bg_clr_prime_extra_extra_light);
+            border-radius: 7px;
+          }
+          .item-box {
+            font-family: "TT Interfaces";
+            font-size: 20px;
+            font-weight: 500;
+            line-height: 30px;
+            color: var(--bg_clr_secondary_extra_dark);
+
+            img {
+              margin-inline-end: 15px;
+            }
+          }
+        }
+      }
+      .accordion-body {
+        width: 100%;
+        padding-inline: 0;
+        max-height: 100%;
+        padding: 0;
+        @include displayFlex(column, flex-start, flex-start);
+        overflow: hidden;
+        .list-tittle {
+          width: 100%;
+          font-family: "TT Interfaces";
+          font-size: 16px;
+          font-weight: 700;
+          line-height: 26px;
+          color: var(--bg_clr_secondary_extra_dark);
+          padding-inline: 14px;
+          padding-block: 14px 10px;
+          @include displayFlex(row, center, flex-start);
+          i {
+            margin-right: 15px;
+          }
+        }
+        .stretch-card {
+          width: 100%;
+          height: 100%;
+          .project_list_card {
+            width: 100%;
+            background: none;
+            overflow: auto;
+            max-height: calc(100svh - 315px);
+            border: none;
+            padding-block-start: 0px;
+            padding-inline: 14px;
+            .card-text {
+              border: none !important;
+              background-color: transparent;
+              border-radius: 5px;
+              font-family: "TT Interfaces";
+              font-weight: 500;
+              line-height: 30px;
+              cursor: pointer;
+              &.active {
+                color: var(--bg_clr_prime_light);
+                background-color: var(--bg_clr_primary);
+                box-shadow: 0px 12.365925788879395px 23.495258331298828px -3.709777593612671px
+                  #00000017;
+                font-weight: 600;
+                .circle {
+                  display: block;
+                  color: var(--bg_clr_prime_light);
+                }
+              }
+            }
+            .noCursor {
+              cursor: none;
+            }
+            .project-name-list {
+              padding: 11px;
+              i {
+                color: var(--bg_clr_secondary_extra_light);
+                font-size: 12px;
+                margin-inline-end: 15px;
+              }
+            }
+            .card_text_dot_left {
+              width: 100%;
+              display: flex;
+              align-items: center;
+              .projectName {
+                text-overflow: ellipsis;
+                overflow: hidden;
+                width: 100%;
+                white-space: nowrap;
+                margin: 0;
+                font-size: 14px;
+                line-height: 19px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+.project_list_card::-webkit-scrollbar {
+  width: 3px;
+}
+/* Track */
+.project_list_card::-webkit-scrollbar-track {
+  background: transparent;
+}
+/* Handle */
+.project_list_card::-webkit-scrollbar-thumb {
+  background: var(--bg_clr_primary_extra_dark);
+  border-radius: 10px;
+}
+
+input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: searchfield-cancel-button;
+}

@@ -1,0 +1,450 @@
+@use "theme/mixin.scss" as *;
+
+.row {
+  --bs-gutter-x: 0;
+}
+.header-block {
+  width: 100%;
+  background-color: var(--bg_clr_primary_dark) !important;
+  border-bottom: 1px solid var(--bg_clr_primary_extra_dark);
+  padding-block: 4px;
+  height: 87px;
+  @include displayFlex(row, center, center);
+  .inner_header_block {
+    width: 100%;
+  }
+}
+
+.data-settings {
+  height: calc(100vh - 87px);
+  padding: 20px 30px;
+  width: 100%;
+}
+.card-body {
+  background-color: var(--bg_clr_prime_extra_extra_light);
+  .card_align {
+    .top-selected-task {
+      // cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 50px;
+      min-width: 400px;
+      .arrow-circle {
+        position: relative;
+        &::after {
+          position: absolute;
+          content: "";
+          background-color: var(--bg_clr_primary);
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          left: 0px;
+          top: -20px;
+          z-index: 0;
+          @include max(1060px) {
+            left: -5px;
+            top: -18px;
+          }
+        }
+        i {
+          position: absolute;
+          z-index: 1;
+          font-size: 20px;
+          top: -11px;
+          left: 10px;
+          color: var(--bg_clr_prime_light);
+          @include max(1060px) {
+            top: -9px;
+            left: 5px;
+          }
+        }
+      }
+      .top-project {
+        color: var(--bg_clr_secondary);
+        font-family: "Jeko DEMO";
+        font-weight: 600;
+        font-size: 20px;
+        line-height: 46px;
+        margin: 0;
+        cursor: context-menu;
+      }
+    }
+    .startplus {
+      color: var(--bg_clr_primary);
+      position: absolute;
+      display: inline-block;
+      font-style: normal;
+      top: 60px;
+      z-index: 1;
+      right: 40px;
+      background-color: var(--bg_clr_prime_light);
+      border: 1px solid var(--bg_clr_prime_light);
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+    }
+    .d_plus {
+      & i {
+        position: absolute;
+        font-size: 20px;
+        top: 14px;
+        z-index: 1;
+        right: 16px;
+      }
+    }
+  }
+  .list-tittle {
+    font-family: "TT Interfaces";
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 25px;
+    color: var(--bg_clr_secondary_extra_dark);
+    i {
+      margin-right: 15px;
+    }
+  }
+  .main_settings_block {
+    padding-block-start: 20px;
+    .left-panel-settings {
+      .settings-list {
+        margin-inline-end: 10px;
+        ul {
+          max-height: 600px;
+          overflow-y: scroll;
+          padding-left: 0;
+          li {
+            cursor: pointer;
+            list-style: none;
+            margin-block-end: 15px;
+            margin-inline-end: 30px;
+            a {
+              font-family: "TT Interfaces";
+              color: var(--bg_clr_secondary_dark);
+              font-size: 22px;
+              font-weight: 500;
+              line-height: 31px;
+              padding: 12px;
+              display: block;
+              border-radius: 12px;
+              width: 100%;
+              text-decoration: none;
+              background-color: var(--bg_clr_primary_dark);
+              position: relative;
+              box-shadow: 0px 12.365925788879395px 12.5px -13.710000038146973px var(--bg_clr_secondary_shadow);
+
+              &.active {
+                background-color: var(--bg_clr_primary);
+                i.arrow-right {
+                  display: block;
+                }
+              }
+              img {
+                margin-inline-end: 20px;
+              }
+              i.arrow-right {
+                display: none;
+                font-size: 15px;
+                position: absolute;
+                right: 20px;
+                top: 50%;
+                transform: translateY(-50%);
+              }
+            }
+          }
+          li.active {
+            a {
+              background-color: var(--bg_clr_primary);
+              box-shadow: 0px 12.365925788879395px 12.5px -13.710000038146973px var(--bg_clr_secondary_shadow);
+            }
+          }
+        }
+      }
+    }
+    .right-content {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+      max-height: 590px;
+      overflow-y: scroll;
+      padding-inline-end: 10px;
+      .contentbox {
+        background-color: var(--bg_clr_primary);
+        position: relative;
+        border-radius: 12px;
+        padding-block-start: 15px;
+        box-shadow: 0px 12.365925788879395px 12.5px -13.710000038146973px var(--bg_clr_secondary_shadow);
+        .content-title {
+          font-family: "TT Interfaces";
+          color: var(--bg_clr_secondary_dark);
+          font-size: 16px;
+          font-weight: 500;
+          line-height: 40px;
+          padding-inline: 15px;
+          @include max(1280px) {
+            font-size: 16px;
+          }
+        }
+        .delete-icon {
+          position: absolute;
+          top: 7px;
+          right: 10px;
+          font-size: 20px;
+          color: var(--bg_clr_attention);
+          border: none;
+          background: transparent;
+        }
+        .input-data {
+          padding: 15px;
+          border-bottom: 1px solid var(--bg_clr_primary_extra_dark);
+          .form-control {
+            color: var(--bg_clr_prime_light);
+            background-color: var(--bg_clr_primary_dark);
+            border: none;
+            padding: 15px;
+            margin-bottom: 15px;
+            font-family: "TT Interfaces";
+            color: var(--bg_clr_secondary_dark);
+            font-size: 20px;
+            font-weight: 500;
+            line-height: 31px;
+            padding-inline: 15px;
+          }
+        }
+        .update-btn {
+          padding: 15px;
+          color: var(--bg_clr_prime_light);
+          font-family: "TT Interfaces";
+          font-size: 23px;
+          font-weight: 700;
+          line-height: 29px;
+          text-align: center;
+          @include max(1600px) {
+            font-size: 14px;
+            padding: 8px 12px;
+          }
+        }
+      }
+    }
+    .no-data {
+      position: absolute;
+      left: 47%;
+      top: 20%;
+      text-align: center;
+      transform: translate(-10%, -10%);
+      .add-img {
+        margin-block: 60px;
+        img {
+          @include max(1600px) {
+            width: 100%;
+            max-width: 250px;
+          }
+        }
+      }
+      p {
+        font-family: "TT Interfaces";
+        font-size: 26px;
+        font-weight: 400;
+        line-height: 32px;
+        color: var(--bg_clr_secondary_extra_light);
+        @include max(1600px) {
+          font-size: 20px;
+          line-height: 28px;
+        }
+      }
+      .add-project a {
+        font-family: "TT Interfaces";
+        font-size: 26px;
+        font-weight: 700;
+        line-height: 32px;
+        color: var(--bg_clr_prime_light);
+        text-decoration: none;
+        cursor: pointer;
+        @include max(1600px) {
+          font-size: 20px;
+          line-height: 28px;
+        }
+      }
+    }
+  }
+}
+
+//Modal Body
+
+.modalcustom-header {
+  padding-inline: 30px;
+  padding-block: 20px;
+  .modal-title {
+    color: var(--bg_clr_secondary);
+    font-family: "TT Interfaces";
+    font-size: 30px;
+    font-weight: 500;
+    line-height: 38px;
+  }
+  .close {
+    position: absolute;
+    right: 25px;
+    top: 15px;
+    border-radius: 50%;
+    outline: none;
+    border: 1px solid var(--bg_clr_attention_light);
+    background-color: var(--bg_clr_attention_light);
+    color: var(--bg_clr_primary);
+    width: 28px;
+    height: 28px;
+    font-size: 22px;
+    line-height: 26px;
+  }
+}
+.modalcustom-body {
+  padding: 30px;
+  .img-user-pic {
+    img {
+      width: 100%;
+      max-width: 100px;
+    }
+  }
+  h2 {
+    font-family: "TT Interfaces";
+    font-size: 30px;
+    font-weight: 500;
+    line-height: 40px;
+    color: var(--bg_clr_secondary_dark);
+    margin: 0;
+  }
+  .modal-body-title {
+    padding-block: 20px;
+    font-family: "TT Interfaces";
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    color: var(--bg_clr_secondary_dark);
+  }
+}
+
+.Modalcustom-headerTwo {
+  padding-inline: 30px;
+  padding-block: 30px;
+  .modal-title {
+    color: var(--bg_clr_secondary);
+    font-family: "TT Interfaces";
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 30px;
+  }
+  .close {
+    position: absolute;
+    right: 25px;
+    top: 15px;
+    border-radius: 50%;
+    outline: none;
+    border: 1px solid var(--bg_clr_attention_light);
+    background-color: var(--bg_clr_attention_light);
+    color: var(--bg_clr_primary);
+    width: 28px;
+    height: 28px;
+    font-size: 22px;
+    line-height: 26px;
+  }
+}
+
+.Modalcustom-bodyTwo {
+  padding: 20px !important;
+  text-align: center;
+  text-align: -webkit-center;
+  .roundbody {
+    width: 120px;
+    height: 120px;
+    border: 1px solid var(--bg_clr_prime_extra_extra_light);
+    background-color: var(--bg_clr_prime_extra_extra_light);
+    border-radius: 50%;
+    span i {
+      font-size: 70px !important;
+      color: var(--bg_clr_prime_light);
+      line-height: 120px;
+    }
+  }
+
+  .roundbody.green-check {
+    border: 1px solid var(--bg_clr_green_light);
+    background-color: var(--bg_clr_green_light);
+    span i {
+      color: var(--bg_clr_green);
+    }
+  }
+  .modal-title {
+    font-family: "TT Interfaces";
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 30px;
+    width: 330px;
+    padding-block: 20px;
+  }
+  .btn-group1 {
+    width: 200px;
+
+    & button:first-child {
+      background-color: var(--bg_clr_prime_extra_extra_light);
+      color: var(--bg_clr_prime_light);
+      font-size: 20px;
+      padding: 10px 60px;
+      font-family: "TT Interfaces";
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 29px;
+      border: 1px solid var(--bg_clr_prime_extra_extra_light);
+      border-radius: 18px;
+      margin-block-end: 20px;
+    }
+    & button:last-child {
+      background-color: var(--bg_clr_attention_extra_light);
+      color: var(--bg_clr_attention);
+      font-size: 20px;
+      padding: 10px 60px;
+      font-family: "TT Interfaces";
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 29px;
+      border: 1px solid var(--bg_clr_attention_extra_light);
+      border-radius: 18px;
+      margin-block-end: 20px;
+    }
+  }
+}
+
+.content-overflow::-webkit-scrollbar {
+  width: 3px;
+}
+/* Track */
+.content-overflow::-webkit-scrollbar-track {
+  background: transparent;
+}
+/* Handle */
+.content-overflow::-webkit-scrollbar-thumb {
+  background: var(--bg_clr_primary_extra_dark);
+  border-radius: 10px;
+}
+.update-btn.disabled {
+  color: var(--bg_clr_secondary_extra_light);
+  background-color: transparent;
+}
+::ng-deep {
+  .modal-dialog {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    margin: auto;
+
+    .modal-content {
+      border: none;
+      background-color: var(--bg_clr_primary);
+      border-radius: 19px;
+      box-shadow: 0px 45.959999084472656px 51px -7.590000152587891px var(--bg_clr_secondary_light_shadow);
+      .modal-header {
+        justify-content: center;
+        border-bottom: none;
+      }
+    }
+  }
+}

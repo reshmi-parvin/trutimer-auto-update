@@ -1,0 +1,399 @@
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+  />
+</head>
+<nav class="sidebar sidebar-offcanvas" id="sidebar">
+  <div class="sider_logo d-flex align-items-center justify-content-start">
+    <a
+      class="navbar-brand brand-logo brand_logo_img"
+      href="JavaScript:Void(0)"
+      [routerLink]="['/detail/dashboard']"
+      [routerLinkActive]="['active']"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      <div
+        class="main-logo d-flex align-items-center justify-content-start gap-3"
+      >
+        <img class="first_img" src="./assets/images/logo.png" alt="logo" />
+        <h1>Sentientgeeks</h1>
+      </div>
+      <!-- <img class="second_img" src="./assets/images/icon-01.png" alt="logo" /> -->
+    </a>
+  </div>
+  <div class="sider_bar_menu">
+    <div class="inner_side_bar_menu">
+      <ul class="inner_side_bar_menu_list">
+        <!-- <li>
+          <div class="nav-link-item">
+            <i class="fa fa-search" aria-hidden="true"></i>
+            <span class="menu-title">Search</span>
+          </div>
+          <input
+            class="form-control bg-gray"
+            type="search"
+            name="search"
+            [(ngModel)]="appservice.searchBy"
+            autocomplete="off"
+            placeholder="Search"
+          />
+          <div class="accordion project-list-down">
+            <span class="selected-display">Projects</span>
+          </div>
+        </li> -->
+        <li>
+          <div class="nav-link-item">
+            <i class="fa fa-clone" aria-hidden="true"></i>
+            <span class="menu-title">Recent tasks</span>
+          </div>
+          <div class="recent_list_wrapper" *ngIf="!this.appservice.settingPageLoading">
+            <ul class="recent-list">
+              <li *ngFor="let task of appservice.recentTasksData">
+                <a
+                  [ngClass]="{
+                    'highlighted-task':
+                      task.taskId === appservice.selectedissueclass
+                  }"
+                  class="task_link"
+                  data-toggle="tooltip"
+                  title="{{ task.taskName }}"
+                  (click)="
+                    dashboardComponent.selectTasksFromRecentTasks(
+                      task.projectId,
+                      task.taskId,
+                      task.sourceCode,
+                      task.projectName,
+                      task.baseUrlId
+                    )
+                  "
+                >
+                  <!-- <i class="fa fa-circle task-circle" aria-hidden="true"></i> -->
+                  <i
+                    class="fa task-circle"
+                    [ngClass]="{
+                      'fa-play':
+                        task.taskId === appservice.runningIssueId,
+                      'fa-circle': task.taskId !== appservice.runningIssueId
+                    }"
+                    aria-hidden="true"
+                  ></i>
+                  <p class="text">{{ task.taskName }}</p>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class="recent_list_wrapper" *ngIf="this.appservice.settingPageLoading">
+            <ul class="recent-list">
+              <li *ngFor="let task of appservice.recentTasksData">
+                <a
+                [ngClass]="{
+                  'highlighted-task':
+                    task.taskId === appservice.selectedissueclass
+                }"class="task_link"
+                  data-toggle="tooltip"
+                  title="{{ task.taskName }}"
+                  (click)="
+                    onItemClick(
+                      task.projectId,
+                      task.taskId,
+                      task.sourceCode,
+                      task.projectName,
+                      task.baseUrlId
+                    )
+                  "
+                >
+                <i
+                class="fa task-circle"
+                [ngClass]="{
+                  'fa-play':
+                    task.taskId === appservice.runningIssueId,
+                  'fa-circle': task.taskId !== appservice.runningIssueId
+                }"
+                aria-hidden="true"
+              ></i>
+                  <p class="text">{{ task.taskName }}</p>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- <div>
+      <a
+        class="nav-link accordian_link"
+        style="cursor: pointer"
+        (click)="signout()"
+      >
+        <i class="fa fa-sign-out singout"></i>
+        Sign Out
+      </a>
+    </div> -->
+
+    <div class="footer_side_wrapper">
+      <ul class="footer_side_list">
+        <!-- <li class="user-img">
+          <div class="profile_img">
+            <img
+              *ngIf="appservice.profileImage"
+              [src]="appservice.profileImage"
+              alt="profile picture"
+            />
+            <img
+              *ngIf="!appservice.profileImage"
+              src="./assets/images/noProfilepic.png"
+              alt="profile picture"
+            />
+            <div class="on-symbol"></div>
+          </div>
+        </li> -->
+        <li>
+          <div class="profile-account" placement="right">
+            <div class="accordion profile-block">
+              <div class="profile_img" (click)="open(content)">
+                <img
+                  *ngIf="appservice.profileImage"
+                  [src]="appservice.profileImage"
+                  alt="profile picture"
+                />
+                <img
+                  *ngIf="!appservice.profileImage"
+                  src="./assets/images/noProfilepic.png"
+                  alt="profile picture"
+                />
+                <div class="on-symbol"></div>
+              </div>
+              <span class="profile-text">
+                {{ appservice.userProfileName }}
+                <em *ngIf="appservice.isOnline">Associate</em>
+              </span>
+            </div>
+            <div class="panel">
+              <ul>
+                <!-- <li class="m-0">
+                  <a class="nav-link accordian_link" style="cursor: pointer" (click)="open(content)">
+                    <i class="fa fa-user-o user"></i>
+                    View Profile
+                  </a>
+                </li> -->
+                <li class="m-0">
+                  <a
+                    class="nav-link accordian_link"
+                    style="cursor: pointer"
+                    [routerLink]="['/detail/settings']"
+                    [routerLinkActive]="['active']"
+                    [routerLinkActiveOptions]="{ exact: true }"
+                  >
+                    <i class="fa fa-cog"></i>
+                    Settings
+                  </a>
+                </li>
+                <!-- <li>
+                  <a class="nav-link accordian_link" style="cursor: pointer" (click)="refresh()">
+                    <i class="fa fa-refresh refresh" aria-hidden="true"></i>
+                    Refresh
+                  </a>
+                </li> -->
+                <!-- <li>
+                  <a class="d-flex align-items-center justify-content-start gap-3">
+                    <i class="fa fa-sun-o" aria-hidden="true"></i>
+                    <div class="light-dark-toggle">
+                      <div class="text-toggle">Light</div>
+                      <div class="button-toggle r" id="button-3">
+                        <input type="checkbox" class="checkbox" (click)="toggleDarkMode()" />
+                        <div class="knobs"></div>
+                        <div class="layer"></div>
+                      </div>
+                      <div class="text-toggle">Dark</div>
+                    </div>
+                  </a>
+                </li> -->
+
+                <li *ngIf="appservice.runningIssueId">
+                  <a
+                    class="nav-link accordian_link"
+                    style="cursor: pointer"
+                    (click)="modalSignout(mySignout)"
+                    data-target="#mySignout"
+                  >
+                    <i class="fa fa-sign-out singout"></i>
+                    Sign Out
+                  </a>
+                </li>
+                <li *ngIf="!appservice.runningIssueId">
+                  <a
+                    class="nav-link accordian_link"
+                    style="cursor: pointer"
+                    (click)="signout()"
+                  >
+                    <i class="fa fa-sign-out singout"></i>
+                    Sign Out
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </li>
+        
+        <li class="footer-sidebar">
+            <div class="logo_footer_icon">
+              <img
+              class="footer_first_img"
+              src="./assets/images/footer_logo.png"
+              alt=""
+            />
+            <img
+              class="footer_second_img"
+              src="./assets/images/truTimer.svg"
+              alt="logo"
+            />
+            </div>
+
+            <p class="copyright-text">
+              Copyright © {{ year }}
+              <a
+                href="https://www.sentientgeeks.com/"
+                target="https://www.sentientgeeks.com/"
+                >Trutimer</a
+              >, All rights reserved.
+            </p>
+            <small class="version" style="color: white" appVersion></small>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<ng-template #content let-modal>
+  <div class="view-profile-modal">
+    <div class="modal-header modalcustom-header">
+      <h4 class="modal-title" id="modal-basic-title">User Details</h4>
+      <button
+        type="button"
+        class="close"
+        aria-label="Close"
+        (click)="modal.dismiss('Cross click')"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body modalcustom-body">
+      <form>
+        <div class="form-group img-user-pic">
+          <!-- <h6>Profile Picture</h6> -->
+          <img
+            *ngIf="appservice.profileImage"
+            class="img rounded-circle"
+            [src]="appservice.profileImage"
+            alt="Profile image"
+          />
+          <img
+            *ngIf="!appservice.profileImage"
+            class="img rounded-circle"
+            src="./assets/images/noProfilepic.png"
+            alt="Profile image"
+          />
+          <div class="on-symbol-user"></div>
+        </div>
+        <div class="w-100 form-data" [formGroup]="myGroup">
+          <div class="input-doc">
+            <i class="fa fa-user-circle" aria-hidden="true"></i>
+            <input
+              id=""
+              formControlName="name"
+              readonly
+              class="form-control"
+              placeholder="XYZ...."
+              name="dp"
+            />
+          </div>
+          <div class="input-doc">
+            <i class="fa fa-envelope" aria-hidden="true"></i>
+            <input
+              id=""
+              formControlName="email"
+              readonly
+              class="form-control"
+              placeholder="XYZ....@gmail.com"
+              name="dp"
+            />
+          </div>
+        </div>
+      </form>
+    </div>
+    <!-- <div class="modal-footer modalcustom-footer">
+      <button
+        type="button"
+        class="btn btn-outline-dark"
+        (click)="modal.close('Save click')"
+      >
+        Close
+      </button>
+    </div> -->
+  </div>
+</ng-template>
+<ng-template #mySignout let-modal>
+  <div class="view-profile-modal">
+    <div class="modal-header modalcustom-header">
+      <h4 class="modal-title" id="modal-basic-title">
+        Timer working on background
+      </h4>
+      <button
+        type="button"
+        class="close"
+        aria-label="Close"
+        (click)="modal.dismiss('Cross click')"
+      >
+        <span aria-hidden="true"
+          ><i class="fa fa-times" aria-hidden="true"></i
+        ></span>
+      </button>
+    </div>
+    <div class="modal-body modalcustom-body text-center">
+      <h2 class="modal-title">Do you really want to stop and signout?</h2>
+    </div>
+    <div class="modal-footer modalcustom-footer">
+      <button
+        type="button"
+        class="btn btn btn-primary"
+        (click)="takeScreenshotSignout(); modal.dismiss('Cross click')"
+      >
+        Yes
+      </button>
+      <button
+        type="button"
+        class="btn btn-warning"
+        (click)="modal.dismiss('Cross click')"
+      >
+        No
+      </button>
+    </div>
+  </div>
+</ng-template>
+<!--desktop screenshot html element-->
+<video
+  #livevideo
+  style="
+    height: 900px;
+    width: 900px;
+    border: 2px solid red;
+    position: absolute;
+    top: -10000px;
+    left: -10000px;
+  "
+></video>
+<canvas
+  #screenshot
+  style="
+    height: 30%;
+    width: 30%;
+    border: 2px solid green;
+    position: absolute;
+    top: -10000px;
+    left: -10000px;
+  "
+>
+</canvas>

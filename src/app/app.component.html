@@ -1,0 +1,9 @@
+<app-splash-screen 
+[animationType]="splashAnimationType.FadeOut"
+[duration]="2" 
+[animationDuration]="3">
+</app-splash-screen>
+<div class="main"><router-outlet (window:resize)="onResize($event)">
+    <app-title-bar></app-title-bar>
+</router-outlet>
+</div> 

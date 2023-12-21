@@ -1,0 +1,75 @@
+<div class="projectListbg">
+  <div class="left_panel_tab" *ngFor="let ele of appservice.settingSource">
+    <ngb-accordion
+      #acc="ngbAccordion"
+      [activeIds]="appservice.lastSourceCode || ''"
+      (panelChange)="dashboardcomponent.toggleAccordian($event)"
+    >
+      <ngb-panel [id]="ele.sourceCode">
+        <ng-template ngbPanelTitle>
+          <div class="accordian_btn" (click)="dashboardcomponent.getProjects(ele.sourceCode)">
+            <div class="item-box">
+              <img [src]="dashboardcomponent.getLogoPath(ele.sourceName)" />{{
+                ele.sourceName
+              }}
+            </div>
+            <i class="las la-angle-down rotate"></i>
+          </div>
+        </ng-template>
+        <ng-template ngbPanelContent>
+          <div class="list-tittle">
+            <i class="fa fa-folder-o" aria-hidden="true"></i>
+            Projects
+          </div>
+          <div class="grid-margin stretch-card">
+            <div
+              #projectList
+              class="card project_list_card"
+              (scroll)="dashboardcomponent.onScroll($event)"
+            >
+              <div class="" *ngFor="let ele of appservice.projects">
+                <div
+                  class="card-block"
+                  (click)="
+                    dashboardcomponent.selectIssue(
+                      ele.id,
+                      ele.source,
+                      ele.name,
+                      ele.baseUrlId
+                    )
+                  "
+                >
+                  <div
+                    id="{{
+                      appservice.selectedprojectclass === ele.id
+                        ? 'project'
+                        : ''
+                    }}"
+                    class="card-text project-name-list card_text_dot_left  {{
+                      appservice.selectedprojectclass === ele.id ? 'active' : ''
+                    }}"
+                    data-toggle="tooltip"
+                    title="{{ ele.name }}"
+                  >
+                    <!-- <i class="fa fa-play start" aria-hidden="true"></i> -->
+                    <!-- <i class="fa fa-play play" aria-hidden="true"></i> -->
+                    <i class="fa fa-circle circle" aria-hidden="true"></i>
+                    <p class="projectName">
+                      {{ ele.name }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-12" *ngIf="appservice.projects.length === 0">
+                <p class="card-text noCursor" style="padding: 0 15px 10px 15px">
+                  No project found for the current search.
+                </p>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </ngb-panel>
+    </ngb-accordion>
+  </div>
+</div>

@@ -1,0 +1,12 @@
+{
+  "name": "Trutimer-2",
+  "description": "Trutimer is a Time Tracking Application develop by SentientGeeks Dev Teams",
+  "author": {
+    "name": "Trutimer-2",
+    "email": "maxime.gris@gmail.com"
+  },
+  "version": "2.0.2",
+  "main": "main.js",
+  "private": true,
+  "dependencies": {}
+}

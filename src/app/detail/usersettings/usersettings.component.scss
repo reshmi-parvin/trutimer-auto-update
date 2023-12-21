@@ -1,0 +1,246 @@
+.grid-margin{margin-top: 10px;}
+.background_none{background: none;}
+.background_none .card-body{padding: 1.8rem 0.5rem;}
+.showdiv {
+    display: block;
+  }
+  
+  .hidediv {
+    display: none;
+  }
+  .selected-card {
+    height: 56px;
+    background-color: #0054aa;
+    padding: 10px 20px;
+    color: #fff;
+    border-radius: 10px;
+    margin-top: -4%;
+    margin-right: -2%;
+    margin-left: -2%;
+  }
+  img {
+    vertical-align: middle;
+    border-style: none;
+    width: 69%;
+  }
+  .setting_wrap {
+    margin-top: 6%;
+  }
+  .top-project {
+    margin-top: 4%;
+  }
+  .fromcontrolapi {
+    height: 34px;
+    text-align: center;
+    width: 283px;
+    margin-left: 12%;
+  }
+  .basecamp-logo {
+    width: 87%;
+    margin-right: 10%;
+    margin-top: 6%;
+  }
+  .col-9 {
+    margin-left: -25px;
+  }
+  .trello-logo {
+    width: 73%;
+    margin-right: 19%;
+    margin-top: 4%;
+  }
+  .text-add {
+    text-align: right;
+    padding-top: 2%;
+    margin-right: -19%;
+    margin-bottom: 0%;
+  }
+  .list-group {
+    text-align: center;
+    border-radius: 0.55rem;
+    margin-top: 6%;
+  }
+  .list-group-item {
+    &.active {
+      background-color: #308ee038;
+    }
+    &:hover {
+      background-color: #308ee038;
+    }
+  }
+  
+  .Modalcustom-headerTwo .close {
+    padding: 0;
+    margin: -15px -10px 0px auto;
+  }
+  
+  .fromcontrolapi {
+    height: 34px;
+  }
+  
+  .Modalcustom-headerTwo {
+    padding: 10px 20px !important;
+    margin: 0 !important;
+    border: none;
+    justify-content: flex-end;
+    background-color: #fff;
+  }
+  
+  .Modalcustom-headerTwo button {
+    height: 30px;
+    width: 30px;
+    border-radius: 5px;
+    background: #0054aa;
+    display: grid;
+  }
+  
+  .Modalcustom-headerTwo button span {
+    color: #fff !important;
+    font-size: 24px !important;
+    line-height: 24px;
+    text-align: center;
+  }
+  
+  .Modalcustom-bodyTwo {
+    padding: 20px !important;
+    text-align: center;
+    text-align: -webkit-center;
+    background-color: #fff;
+  }
+  
+  .Modalcustom-bodyTwo .roundbody {
+    width: 75px;
+    height: 75px;
+    border: 2px solid #0054aa;
+    color: #0054aa;
+    border-radius: 50%;
+  }
+  
+  .Modalcustom-bodyTwo .roundbody span {
+    font-size: 70px !important;
+    color: #0054aa;
+    line-height: 57px;
+  }
+  
+  .Modalcustom-bodyTwo button:first-child {
+    background-color: #acacac;
+    color: #fff;
+    font-size: 15px;
+    padding: 0.56rem 1.375rem;
+    font-weight: 400;
+    border: 1px solid #acacac;
+    border-radius: 3px;
+    margin-right: 20px;
+  }
+  
+  .Modalcustom-bodyTwo button:last-child {
+    background-color: #0054aa;
+    color: #fff;
+    font-size: 15px;
+    padding: 0.56rem 1.375rem;
+    font-weight: 400;
+    border: 1px solid #0054aa;
+    border-radius: 3px;
+  }
+  
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin: 0;
+    padding: 0;
+  }
+  
+  ::ng-deep {
+    .swith_api {
+      text-align: right;
+    }
+    .swith_api .switch-medium {
+      width: 38px !important;
+      height: 20px !important;
+    }
+    .swith_api .switch-medium small {
+      width: 19px !important;
+      height: 19px !important;
+    }
+    .swith_api .checked {
+      background: #0054aa !important;
+    }
+    .showdiv {
+      width: 50%;
+      margin-top: 15px;
+      padding: 0 12.5px;
+    }
+    .card-title {
+      display: none;
+    }
+    .card-description {
+      display: none;
+    }
+    .card-body .row:first-child {
+      margin-top: 0px !important;
+    }
+    .btn-success,
+    .btn-success:active,
+    .btn-success:focus {
+      background-color: #0054aa;
+      border-color: #0054aa;
+      outline: none;
+      box-shadow: none;
+    }
+    .btn-success:hover {
+      background-color: #1ea4e1;
+      border-color: #1ea4e1;
+    }
+    .button-success:hover {
+      background-color: #1ea4e1;
+      border-color: #1ea4e1;
+    }
+    .button {
+      border: none;
+      background-color: #D3D3D3;
+      color: rgb(55, 52, 52);
+      border-radius: 5px;
+    }
+    .logosettings {
+      width: 100%;
+      margin-bottom: 8px;
+    }
+    .setting_wrap {
+      width: 100%;
+      align-items: center;
+      display: flex;
+    }
+    .fromcontrolapi {
+      height: 34px;
+      margin-top: 7%;
+      width: 270px;
+      background: #f2f8fd;
+      margin-bottom: 5%;
+    }
+    .swith_api {
+      text-align: center;
+    }
+    .form-control {
+      box-shadow: none;
+      margin-bottom: 7px;
+    }
+    .setting_box {
+      padding: 20px;
+      margin-right: 42px;
+      margin-top: 30px;
+      margin-left: 42px;
+      background: #fff;
+      border-radius: 10px;
+      width: 200px;
+      text-align: center;
+      box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.12);
+      -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.12);
+      -moz-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.12);
+    }
+    // .setting_box .row .showdiv:nth-of-type(4) {
+    //   text-align: right;
+    // }
+  }
+  
